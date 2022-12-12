@@ -1,3 +1,2 @@
 selene
 pytest
-allure-pytest
