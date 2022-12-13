@@ -14,7 +14,15 @@ def test_complete_form(open_browser):
     browser.element('#userEmail').type('veseloI@test.ru')
     browser.all('[for^=gender-radio]').element_by(have.text('Male')).click()
     browser.element('#userNumber').type('9114477111')
-    browser.element('#dateOfBirthInput').perform(command.js.set_value('08-12-2002'))
+
+    # browser.element('#dateOfBirthInput').perform(command.js.set_value('08-12-2002'))
+
+    browser.element('#dateOfBirthInput').click()
+    browser.element('.react-datepicker__month-select').type('December')
+    browser.element('.react-datepicker__year-select').type(2002)
+    browser.element(
+        f'.react-datepicker__day--0{25}:not(.react-datepicker__day--outside-month)'
+    ).click()
 
     browser.element('#subjectsInput').perform(command.js.scroll_into_view)
     browser.element('#subjectsInput').type('English').press_enter()
@@ -41,7 +49,7 @@ def test_complete_form(open_browser):
             'veseloI@test.ru',
             'Male',
             '9114477111',
-            '12 December,2022',
+            '25 December,2002',
             'English',
             'Music',
             '1.jpg',
@@ -49,4 +57,3 @@ def test_complete_form(open_browser):
             'Uttar Pradesh Agra',
         )
     )
-
